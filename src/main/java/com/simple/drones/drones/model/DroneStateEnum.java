@@ -1,6 +1,6 @@
 package com.simple.drones.drones.model;
 
-public enum DoneStateEnum {
+public enum DroneStateEnum {
     IDLE,
     LOADING,
     LOADED,

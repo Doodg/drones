@@ -1,13 +1,15 @@
 package com.simple.drones.drones.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class DroneDTO {
     private String serialNumber;
     private DroneModelEnum model;
-    private int droneWeight;
+    private int maxWeight;
     private int battery;
-    private DoneStateEnum state;
+    private DroneStateEnum state;
 
 }

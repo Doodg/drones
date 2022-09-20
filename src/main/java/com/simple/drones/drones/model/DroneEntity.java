@@ -1,29 +1,32 @@
 package com.simple.drones.drones.model;
 
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
-@Data
+@Entity(name = "drones")
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class DroneEntity {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     @Column(name = "serial_number", unique = true)
     private String serialNumber;
 
     @Enumerated(EnumType.STRING)
     private DroneModelEnum model;
 
-    @Column(name = "serial_weight")
-    private int droneWeight;
+    @Column(name = "max_weight")
+    private double maxWeight;
 
     private int battery;
 
     @Enumerated(EnumType.STRING)
-    private DoneStateEnum state;
+    private DroneStateEnum state;
 }
