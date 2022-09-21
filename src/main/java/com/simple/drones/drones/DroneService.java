@@ -3,6 +3,7 @@ package com.simple.drones.drones;
 import com.simple.drones.drones.model.*;
 import com.simple.drones.exceptions.DroneAlreadyRegisteredException;
 import com.simple.drones.exceptions.InvalidRequestDetails;
+import com.simple.drones.exceptions.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -49,6 +50,14 @@ public class DroneService {
                 .maxWeight(droneRegisterDTO.getMaxWeight())
                 .serialNumber(droneRegisterDTO.getSerialNumber())
                 .state(DroneStateEnum.IDLE).build()));
+    }
+
+    public DroneDTO droneBatteryLevel(String droneSerialNumber) throws NotFoundException {
+        DroneDTO drone = droneMapper.mapEntityToDTO(droneRepository.findBySerialNumber(droneSerialNumber).orElse(null));
+        if (drone == null) {
+            throw new NotFoundException();
+        }
+        return drone;
     }
 
 }
