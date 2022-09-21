@@ -15,7 +15,7 @@ public class DroneEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     @Column(name = "serial_number", unique = true)
     private String serialNumber;
 
@@ -23,7 +23,7 @@ public class DroneEntity {
     private DroneModelEnum model;
 
     @Column(name = "max_weight")
-    private double maxWeight;
+    private int maxWeight;
 
     private int battery;
 

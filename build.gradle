@@ -40,8 +40,7 @@ tasks.named('test') {
 }
 
 flyway {
-    url = "jdbc:mysql://localhost:3306/drones"
+    url = "jdbc:mysql://localhost:3306/drones_db"
     user = "root"
     password = "123456"
-    outOfOrder = true
 }

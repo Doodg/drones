@@ -9,4 +9,5 @@ import org.springframework.web.bind.annotation.Mapping;
 public abstract class DroneMapper {
 
     public abstract DroneDTO mapEntityToDTO(DroneEntity droneEntity);
+    public abstract DroneEntity mapDTOToEntity(DroneDTO droneEntity);
 }
