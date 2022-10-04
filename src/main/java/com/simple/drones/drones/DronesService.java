@@ -4,25 +4,31 @@ import com.simple.drones.drones.model.*;
 import com.simple.drones.exceptions.DroneAlreadyRegisteredException;
 import com.simple.drones.exceptions.InvalidRequestDetails;
 import com.simple.drones.exceptions.NotFoundException;
+import com.simple.drones.medicine.MedicineService;
+import com.simple.drones.medicine.model.MedicineDTO;
+import com.simple.drones.trips.TripHistoryService;
+import com.simple.drones.trips.model.TripHistoryDTO;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @AllArgsConstructor
-public class DroneService {
-    private final DroneRepository droneRepository;
+public class DronesService {
+    private final DronesRepository dronesRepository;
     private final DroneMapper droneMapper;
+    private final MedicineService medicineService;
 
     public List<DroneDTO> getAllAvailableDrones() {
-        return droneRepository.findAllByStateIs(DroneStateEnum.IDLE).stream().map(droneMapper::mapEntityToDTO).collect(Collectors.toList());
+        return dronesRepository.findAllByStateIs(DroneStateEnum.IDLE).stream().map(droneMapper::mapEntityToDTO).collect(Collectors.toList());
     }
 
     public DroneDTO registerNewDrone(DroneRegisterDTO droneRegisterDTO) throws DroneAlreadyRegisteredException, InvalidRequestDetails {
-        DroneDTO drone = droneMapper.mapEntityToDTO(droneRepository.findBySerialNumber(droneRegisterDTO.getSerialNumber()).orElse(null));
+        DroneDTO drone = droneMapper.mapEntityToDTO(dronesRepository.findBySerialNumber(droneRegisterDTO.getSerialNumber()).orElse(null));
         if (drone != null) {
             throw new DroneAlreadyRegisteredException();
         }
@@ -43,8 +49,8 @@ public class DroneService {
             throw new InvalidRequestDetails("Drone Max Weight is invalid");
 
         }
-
-        return droneMapper.mapEntityToDTO(droneRepository.save(DroneEntity.builder()
+        log.info("A Drone with serial {}, and model {} is saving ", droneRegisterDTO.getSerialNumber(), droneRegisterDTO.getModel());
+        return droneMapper.mapEntityToDTO(dronesRepository.save(DroneEntity.builder()
                 .battery(100)
                 .model(droneRegisterDTO.getModel())
                 .maxWeight(droneRegisterDTO.getMaxWeight())
@@ -52,12 +58,23 @@ public class DroneService {
                 .state(DroneStateEnum.IDLE).build()));
     }
 
-    public DroneDTO droneBatteryLevel(String droneSerialNumber) throws NotFoundException {
-        DroneDTO drone = droneMapper.mapEntityToDTO(droneRepository.findBySerialNumber(droneSerialNumber).orElse(null));
+    public DroneDTO getDroneDetails(long droneId) throws NotFoundException {
+        DroneDTO drone = droneMapper.mapEntityToDTO(dronesRepository.findById(droneId).orElse(null));
         if (drone == null) {
-            throw new NotFoundException();
+            throw new NotFoundException("Drone Not found");
         }
         return drone;
     }
+
+    public DroneDTO droneBatteryLevel(long droneId) throws NotFoundException {
+        return getDroneDetails(droneId);
+    }
+
+    public void updateDroneState(long droneId, DroneStateEnum droneStateEnum) {
+        log.info("A Drone with id {}, changed State to {}", droneId, droneStateEnum.name());
+        dronesRepository.updateDroneState(droneId, droneStateEnum);
+    }
+
+
 
 }

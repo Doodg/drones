@@ -1,9 +1,6 @@
-package com.simple.drones.medicine;
+package com.simple.drones.medicine.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,6 +8,8 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity(name = "medicines")
+@Builder
+@AllArgsConstructor
 public class MedicineEntity {
 
     @Id
