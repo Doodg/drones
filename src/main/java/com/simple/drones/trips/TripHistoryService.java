@@ -66,7 +66,7 @@ public class TripHistoryService {
     public TripHistoryDTO getLoadedTrip(Long tripId) throws NotFoundException {
         TripHistoryEntity tripHistoryDTO = tripHistoryRepository.findById(tripId).orElse(null);
         if (tripHistoryDTO == null) {
-            throw new NotFoundException("not Trip found of id " + tripId);
+            throw new NotFoundException("No trip found of id " + tripId);
 
         }
         return tripHistoryMapper.mapEntityToDTO(tripHistoryDTO);

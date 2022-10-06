@@ -36,16 +36,13 @@ public class DronesService {
     }
 
     private DroneDTO validateAndSaveDroneDetails(DroneRegisterDTO droneRegisterDTO) throws InvalidRequestDetails {
-        if (droneRegisterDTO.getSerialNumber().length() <= 0 || droneRegisterDTO.getSerialNumber().length() > 100) {
+        if (droneRegisterDTO.getSerialNumber().isEmpty() || droneRegisterDTO.getSerialNumber().length() > 100) {
             throw new InvalidRequestDetails("Drone Serial Number is invalid");
-        }
-        if (droneRegisterDTO.getSerialNumber().isEmpty()) {
-            throw new InvalidRequestDetails("Drone Serial Number is required");
         }
         if (droneRegisterDTO.getModel().name().isEmpty()) {
             throw new InvalidRequestDetails("Drone Model is required");
         }
-        if (droneRegisterDTO.getMaxWeight() <= 0) {
+        if (droneRegisterDTO.getMaxWeight() <= 0 || droneRegisterDTO.getMaxWeight() >= 500) {
             throw new InvalidRequestDetails("Drone Max Weight is invalid");
 
         }
@@ -74,7 +71,6 @@ public class DronesService {
         log.info("A Drone with id {}, changed State to {}", droneId, droneStateEnum.name());
         dronesRepository.updateDroneState(droneId, droneStateEnum);
     }
-
 
 
 }
