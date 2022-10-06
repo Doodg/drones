@@ -1,0 +1,213 @@
+{
+	"info": {
+		"_postman_id": "5666d02e-5b7c-4326-8f8c-1b30a4e192ea",
+		"name": "Travler-Drone-APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20100631"
+	},
+	"item": [
+		{
+			"name": "New Drone",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"serialNumber\":\"az2\",\n    \"model\":\"LIGHTWEIGHT\",\n    \"maxWeight\":300\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/drones/newDrone",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drones",
+						"newDrone"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Available Drones",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/drones/allAvailable",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drones",
+						"allAvailable"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Drone Battery",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/drones/checkDroneBattery?droneId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"drones",
+						"checkDroneBattery"
+					],
+					"query": [
+						{
+							"key": "droneId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add New Medicine",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\":\"DRUG_1\",\n\"name\":\"Panadol\",\n\"weight\":120.5,\n\"image\":\"https://thumbs.dreamstime.com/z/close-up-group-medicine-drug-capsule-caplet-tablet-format-white-background-close-up-group-medicine-capsule-178796964.jpg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/medicine/newMedicine",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"medicine",
+						"newMedicine"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Medicine Details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/medicine/details?medicineCode=DRUG_1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"medicine",
+						"details"
+					],
+					"query": [
+						{
+							"key": "medicineCode",
+							"value": "DRUG_1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Trip Status By Trip Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/trips/checkTripStatus?tripId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"trips",
+						"checkTripStatus"
+					],
+					"query": [
+						{
+							"key": "tripId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Loaded Items For A Drone",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/trips/allForADrone?droneId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"trips",
+						"allForADrone"
+					],
+					"query": [
+						{
+							"key": "droneId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start Load Drone Trip",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"droneId\":1,\n\"medicineCode\":\"DRUG_3\",\n\"startPointLocation\":\"Old Cairo\",\n\"destinationLocation\":\"New Cairo\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/trips/newTrip",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"trips",
+						"newTrip"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
