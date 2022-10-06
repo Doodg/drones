@@ -8,6 +8,29 @@ services:
     volumes:
       - ~/apps/mariadb:/var/lib/mysql
     environment:
+      - MYSQL_DATABASE=drones_db
       - MYSQL_ROOT_PASSWORD=123456
       - MYSQL_PASSWORD=123456
-      - MYSQL_DATABASE=drones_db
+      - MYSQL_USERNAME=root
+
+  flyway:
+    image: flyway/flyway:latest
+    volumes:
+      - ./src/main/resources/db/migration/:/flyway/migrations/
+    depends_on:
+      - mariadb
+    links:
+      - mariadb
+    command: -url=jdbc:mysql://mariadb:3306/drones_db?createDatabaseIfNotExist=true&useSSL=false -schemas=drones_db -user=root -password=123456 migrate
+
+  app:
+    container_name: "DronesApp"
+    build:
+      dockerfile: dockerfile
+      context: .
+    links:
+      - "mariadb:database"
+    depends_on:
+      - mariadb
+    ports:
+      - 8080:8080

@@ -32,15 +32,10 @@ dependencies {
     implementation "mysql:mysql-connector-java:8.0.26"
     implementation "org.flywaydb:flyway-mysql"
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
+    testImplementation 'org.mockito:mockito-core:4.6.1'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
-}
-
-flyway {
-    url = "jdbc:mysql://localhost:3306/drones_db"
-    user = "root"
-    password = "123456"
 }
