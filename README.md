@@ -29,4 +29,4 @@ The project is dockrized so follow the steps below:-
 
 
 ### DB & User Journey Diagrams
-check file ``drone digrams musala.html`` 
+check file ``drone-digrams.html`` 
