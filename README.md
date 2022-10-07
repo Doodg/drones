@@ -24,7 +24,6 @@ after download the repo, import ``Travler-Drone-APIs.postman_collection.json`` t
 
 The project is dockrized so follow the steps below:-
 
-* after clone the repo run ``./gradlew bootJar``
 * run command ``docker-compose up``
 * now you can use the App via Postman
 
