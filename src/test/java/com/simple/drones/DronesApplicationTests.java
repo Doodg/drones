@@ -8,8 +8,4 @@ import org.springframework.context.annotation.Profile;
 @SpringBootTest
 class DronesApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
-
 }
